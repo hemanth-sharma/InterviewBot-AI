@@ -1,0 +1,51 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# --- Virtual Environments ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- Environment Variables ---
+.env
+.env*
+
+# --- Database ---
+interviewbot.db
+
+# --- Alembic ---
+# Keep migration scripts (versions/) but ignore cache and generated junk
+alembic/versions/__pycache__/
+# If you don’t want to push the entire alembic folder (not recommended), uncomment:
+# alembic/
+
+# --- Uploads ---
+uploads/
+
+# --- Logs ---
+*.log
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Custom ---
+# Ignore the alembic.ini in root (local config)
+alembic.ini
+
+# Ignore local testing dependencies file
+testing_text.txt

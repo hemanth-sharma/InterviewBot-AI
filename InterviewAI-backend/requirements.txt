@@ -1,0 +1,18 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+alembic
+psycopg2-binary   # Postgres driver
+python-jose[cryptography]   # JWT auth
+passlib[bcrypt]   # Password hashing
+pydantic
+python-multipart  # File uploads
+httpx             # API calls (for LLM, etc.)
+pdfplumber
+python-docx
+openai
+langchain
+openai
+redis
+pydantic-settings
+pydantic[email]
