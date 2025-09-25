@@ -1,0 +1,78 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #1173d4;
+      }
+    </style>
+</head>
+<body class="bg-[#111A22] text-white" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#233648] bg-[#111A22]/80 px-10 py-4 backdrop-blur-sm">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center rounded-md bg-[var(--primary-color)] p-2">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">mic</span>
+</div>
+<h2 class="text-xl font-bold">InterviewBot AI</h2>
+</div>
+<nav class="hidden items-center gap-8 md:flex">
+<a class="text-sm font-medium text-gray-300 hover:text-white" href="#">Product</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white" href="#">Pricing</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white" href="#">Resources</a>
+<a class="rounded-md px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800" href="#">Log in</a>
+<a class="rounded-md bg-[var(--primary-color)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-600" href="#">Get Started</a>
+</nav>
+<button class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="flex flex-1 items-center justify-center py-16">
+<div class="w-full max-w-md space-y-8 px-4">
+<div class="text-center">
+<h1 class="text-4xl font-bold tracking-tighter sm:text-5xl">Practice interviews with AI</h1>
+<p class="mt-4 text-gray-400">Get instant feedback on your answers and improve your interview skills.</p>
+</div>
+<div class="space-y-4">
+<button class="flex w-full items-center justify-center gap-3 rounded-md border border-gray-700 bg-gray-800 py-3 px-4 font-semibold text-white transition-colors hover:bg-gray-700">
+<svg class="text-white" fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z"></path>
+</svg>
+<span>Continue with Google</span>
+</button>
+<div class="relative">
+<div class="absolute inset-0 flex items-center">
+<span class="w-full border-t border-gray-700"></span>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="bg-[#111A22] px-2 text-gray-500">or</span>
+</div>
+</div>
+<form class="space-y-6">
+<div>
+<label class="sr-only" for="email">Email</label>
+<input autocomplete="email" class="form-input block w-full rounded-md border-0 bg-gray-800 py-3 px-4 text-white placeholder-gray-500 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" id="email" name="email" placeholder="Email" required="" type="email"/>
+</div>
+<div>
+<label class="sr-only" for="password">Password</label>
+<input autocomplete="current-password" class="form-input block w-full rounded-md border-0 bg-gray-800 py-3 px-4 text-white placeholder-gray-500 shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)]" id="password" name="password" placeholder="Password" required="" type="password"/>
+</div>
+<button class="flex w-full justify-center rounded-md bg-[var(--primary-color)] py-3 px-4 font-semibold text-white shadow-sm transition-colors hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2 focus:ring-offset-gray-900" type="submit">
+                Continue with Email
+              </button>
+</form>
+</div>
+<p class="text-center text-sm text-gray-400">
+            Don't have an account?
+            <a class="font-medium text-[var(--primary-color)] hover:underline" href="#">Sign up</a>
+</p>
+</div>
+</main>
+</div>
+
+</body></html>
