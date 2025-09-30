@@ -1,19 +1,39 @@
 fastapi
-gunicorn
 uvicorn[standard]
+gunicorn
+
+# Database & ORM
 sqlalchemy
 alembic
 psycopg2-binary   # Postgres driver
-python-jose[cryptography]   # JWT auth
-passlib[bcrypt]   # Password hashing
+
+# Auth & Security
+python-jose[cryptography]   # JWT
+passlib[bcrypt]             # Password hashing
+
+# Pydantic & Settings
 pydantic
-python-multipart  # File uploads
-httpx             # API calls (for LLM, etc.)
-pdfplumber
-python-docx
-openai
-langchain
-openai
-redis
 pydantic-settings
 pydantic[email]
+
+# File handling
+python-multipart  # Form/file uploads
+pdfplumber        # PDF parsing
+python-docx       # Word documents
+
+# HTTP / API clients
+httpx
+
+# AI / LLM Integrations
+openai
+langchain
+langchain-openai
+langchain-community
+langchain-google-genai
+langchain-anthropic
+
+# Google OAuth
+google-auth       # includes google.oauth2.id_token
+
+# Redis (for caching, queues, etc.)
+redis
