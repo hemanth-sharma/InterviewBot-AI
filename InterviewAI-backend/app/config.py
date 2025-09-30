@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET: str | None = None
     RAPIDAPI_KEY: str | None = None
     RAPIDAPI_HOST: str | None = None
+    FRONTEND_URL: str = "http://localhost:3000"
 
     class Config:
         env_file = ".env"

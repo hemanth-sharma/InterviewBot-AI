@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, resume, job, interview, history, feedback, code
+from app.config import settings
 
 app = FastAPI(title="Interview Practice Bot MVP")
 
@@ -8,7 +9,7 @@ app = FastAPI(title="Interview Practice Bot MVP")
 origins = [
     "http://localhost:3000",  # Next.js dev server
     "http://127.0.0.1:3000",
-    # Later you can add your production domain
+    settings.FRONTEND_URL
 ]
 
 app.add_middleware(
