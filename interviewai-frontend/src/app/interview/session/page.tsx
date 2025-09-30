@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import Navbar from "@/components/Navbar";
 import { useEffect, useMemo, useState } from "react";
 import { endInterview, getNextQuestion, getInterview, submitAnswer, runCode } from "@/lib/api";
