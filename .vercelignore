@@ -1,0 +1,31 @@
+# Ignore backend folder completely
+/interviewai-backend/**
+
+# Node modules (frontend)
+/interviewai-frontend/node_modules/**
+
+# Python virtual environments (backend)
+**/venv/**
+**/__pycache__/**
+
+# Environment files (never deploy these)
+*.env
+*.env.*  
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.DS_Store
+
+# Git files
+.git/
+.gitignore
+
+# Build artifacts
+/interviewai-frontend/.next/**
+/interviewai-frontend/dist/**
+/interviewai-frontend/out/**
+
+# Cache folders
+/interviewai-frontend/.cache/
