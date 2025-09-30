@@ -2,8 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, resume, job, interview, history, feedback, code
 from app.config import settings
+from app.database import Base, engine
+
 
 app = FastAPI(title="Interview Practice Bot MVP")
+
+
+# Create tables automatically
+Base.metadata.create_all(bind=engine)
+
 
 # Allow frontend
 origins = [
