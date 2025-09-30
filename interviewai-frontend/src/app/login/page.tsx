@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { loginUser, loginWithGoogle } from "@/lib/api";
 import { GoogleLogin } from "@react-oauth/google";
+import { loginAsDefaultUser } from "@/lib/api";
+
 
 export default function LoginPage() {
 	const router = useRouter();
@@ -45,6 +47,15 @@ export default function LoginPage() {
 		setError("Google sign-in was cancelled or failed");
 	}
 
+	function onSkip() {
+		setError(null);
+		setIsLoading(true);
+		loginAsDefaultUser()
+			.then(() => router.replace("/dashboard"))
+			.catch((err) => setError(err?.message || "Login failed"))
+			.finally(() => setIsLoading(false));
+	}
+
 	return (
 		<div className="bg-[#111A22] text-white min-h-screen flex flex-col">
 			{/* Header */}
@@ -77,6 +88,13 @@ export default function LoginPage() {
 
 					{/* Auth Options */}
 					<div className="space-y-4">
+					<button
+							type="button"
+							onClick={onSkip}
+							className="w-full rounded-md bg-gray-600 py-3 px-4 font-semibold text-white shadow-sm hover:bg-gray-500"
+						>
+							Skip & Login as Demo
+						</button>
 						<div className="flex w-full justify-center">
 							<GoogleLogin
 								onSuccess={(response) => onGoogleSuccess(response.credential)}
@@ -138,6 +156,8 @@ export default function LoginPage() {
 								{isLoading ? "Signing in..." : "Continue with Email"}
 							</button>
 						</form>
+						
+
 					</div>
 
 					{/* Footer */}
