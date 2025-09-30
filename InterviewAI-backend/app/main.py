@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth, resume, job, interview, history, feedback
+from app.routers import auth, resume, job, interview, history, feedback, code
 
 app = FastAPI(title="Interview Practice Bot MVP")
 
@@ -26,7 +26,7 @@ app.include_router(job.router, prefix="/job", tags=["Job"])
 app.include_router(interview.router, prefix="/interview", tags=["Interview"])
 app.include_router(history.router, prefix="/history", tags=["History"])
 app.include_router(feedback.router, prefix="/feedbacks", tags=["feedbacks"])
-
+app.include_router(code.router, prefix="/code", tags=["Code"])
 
 
 @app.get("/")

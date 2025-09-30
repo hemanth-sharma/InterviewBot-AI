@@ -276,6 +276,17 @@ export async function endInterview(interviewId: number) {
 		method: "POST",
 	});
 }
+export async function getInterview(interviewId: number) {
+	return apiRequest(`/interview/${interviewId}`); // <-- fixed leading slash
+}
+
+// Run Code APIs
+export async function runCode(payload: {code: string; language_code: string; stdin?: string}){
+	return apiRequest("/code/run_code", {
+		method: "POST",
+		body: JSON.stringify(payload),
+	});
+}
 
 // Feedback APIs
 export async function submitFeedback(payload: { email: string; feedback_type: string; feedback_text: string }) {

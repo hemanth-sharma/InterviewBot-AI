@@ -9,8 +9,11 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     OPENAI_API_KEY: Optional[str] = None
     GEMINI_API_KEY: Optional[str] = None
+    ANTHROPIC_API_KEY: Optional[str] = None
     GOOGLE_CLIENT_ID: str | None = None
     GOOGLE_CLIENT_SECRET: str | None = None
+    RAPIDAPI_KEY: str | None = None
+    RAPIDAPI_HOST: str | None = None
 
     class Config:
         env_file = ".env"

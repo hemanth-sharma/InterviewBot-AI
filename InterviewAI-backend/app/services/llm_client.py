@@ -1,7 +1,7 @@
 # app/services/llm_client.py
 import os
 from typing import Optional
-
+from app.config import settings
 
 def get_llm(provider: str = "openai", api_key: Optional[str] = None, model: Optional[str] = None):
     """
@@ -15,7 +15,7 @@ def get_llm(provider: str = "openai", api_key: Optional[str] = None, model: Opti
             # Preferred: modern langchain-openai Chat wrapper
             from langchain_openai import ChatOpenAI
             return ChatOpenAI(
-                api_key=api_key or os.getenv("OPENAI_API_KEY"),
+                api_key=api_key or settings.OPENAI_API_KEY,
                 model=model or "gpt-4o-mini",
                 temperature=0.3,
             )
@@ -24,7 +24,7 @@ def get_llm(provider: str = "openai", api_key: Optional[str] = None, model: Opti
             try:
                 from langchain_community.chat_models import ChatOpenAI as CommunityChatOpenAI
                 return CommunityChatOpenAI(
-                    openai_api_key=api_key or os.getenv("OPENAI_API_KEY"),
+                    openai_api_key=api_key or settings.OPENAI_API_KEY,
                     model=model or "gpt-4o-mini",
                     temperature=0.3,
                 )
@@ -37,7 +37,7 @@ def get_llm(provider: str = "openai", api_key: Optional[str] = None, model: Opti
         try:
             from langchain_google_genai import ChatGoogleGenerativeAI
             return ChatGoogleGenerativeAI(
-                api_key=api_key or os.getenv("GEMINI_API_KEY"),
+                api_key=api_key or settings.GEMINI_API_KEY,
                 model=model or "gemini-1.5-mini",
                 temperature=0.3,
             )
@@ -50,7 +50,7 @@ def get_llm(provider: str = "openai", api_key: Optional[str] = None, model: Opti
         try:
             from langchain_anthropic import ChatAnthropic
             return ChatAnthropic(
-                api_key=api_key or os.getenv("ANTHROPIC_API_KEY"),
+                api_key=api_key or settings.ANTHROPIC_API_KEY,
                 model=model or "claude-2",
                 temperature=0.3,
             )

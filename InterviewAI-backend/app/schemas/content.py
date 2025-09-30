@@ -113,3 +113,14 @@ class TranscriptOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+
+class CodeRunRequest(BaseModel):
+    code: str
+    language_code: str   # e.g. "python", "cpp", "java", "javascript", "go"
+    stdin: Optional[str] = None
+
+class CodeRunResponse(BaseModel):
+    success: bool
+    output: str

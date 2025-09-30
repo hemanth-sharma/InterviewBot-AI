@@ -6,8 +6,9 @@ from app.database import get_db
 from app.models.content import Interview, Question, Resume, JobDescription, Transcript, Answer
 from app.schemas.content import InterviewCreate, InterviewOut, AnswerCreate, AnswerOut
 from app.services.scoring import score_text_answer, aggregate_scores, score_with_llm
-from app.services.code_runner import run_python_code
+from app.services.code_runner import run_python_code, run_code
 from app.services.question_generator import generate_next_question
+from app.utils.deactivate_interview import deactivate_if_expired
 import uuid
 import json
 
@@ -64,6 +65,18 @@ def start_interview(payload: InterviewCreate, db: Session = Depends(get_db)):
     db.add(question)
     db.commit()
     db.refresh(interview)
+
+    return interview
+
+
+@router.get("/{interview_id}", response_model=InterviewOut)
+def get_interview(interview_id: int, db: Session = Depends(get_db)):
+    """Fetch interview details (timer, status, etc.)"""
+    interview = db.query(Interview).filter(Interview.id == interview_id).first()
+    if not interview:
+        raise HTTPException(status_code=404, detail="Interview not found")
+    
+    deactivate_if_expired(interview, db)
 
     return interview
 
@@ -133,11 +146,12 @@ def answer_question(interview_id: int, payload: AnswerCreate, db: Session = Depe
 
     # Scoring # Here I want to have a common function that will handle the scoring logic. 
     if payload.is_coding and payload.code:
-        success, output = run_python_code(payload.code, "")
+        # success, output = run_python_code(payload.code, "")
+        success, output = run_code(payload.language_code, payload.code)
         ans.code_result = output
         ans.score = 10 if success else 0
     else:
-        ans.score = score_text_answer(payload.user_text or "")
+        # ans.score = score_text_answer(payload.user_text or "")
         ans.score = score_with_llm(
             question.text,
             payload.user_text or "",

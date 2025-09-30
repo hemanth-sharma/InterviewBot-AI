@@ -29,47 +29,39 @@ export default function DashboardPage() {
 
   async function startInterviewFlow() {
     setError(null);
-    if (!resumeFile) {
-      setError("Please select a resume file to upload.");
-      return;
-    }
-    if (!jobDescription.trim()) {
-      setError("Please paste a job description.");
-      return;
-    }
+    if (!resumeFile) return setError("Please select a resume file to upload.");
+    if (!jobDescription.trim()) return setError("Please paste a job description.");
 
     setIsStarting(true);
     try {
-      // 1) Upload resume
+      // Upload resume
       const resumeRes: any = await uploadResume(resumeFile);
       const resumeId: number = resumeRes?.id ?? resumeRes?.resume_id ?? resumeRes?.resumeId;
       if (!resumeId) throw new Error("Failed to upload resume");
 
-      // 2) Create job description
+      // Create job description
       const jdRes: any = await createJobDescription(jobDescription);
       const jdId: number = jdRes?.id ?? jdRes?.job_description_id ?? jdRes?.jd_id ?? jdRes?.jobDescriptionId;
       if (!jdId) throw new Error("Failed to create job description");
 
-      // 3) Optional: get user id (if backend requires it)
-      let userId: number | undefined = undefined;
+      // Optional: get user id
+      let userId: number | undefined;
       try {
         const me: any = await getCurrentUser();
         userId = me?.id ?? me?.user_id ?? undefined;
-      } catch {
-        // ignore; backend may infer from token
-      }
+      } catch {}
 
-      // 4) Start interview
+      // Start interview
       const started: any = await startInterview({
         resume_id: Number(resumeId),
         job_description_id: Number(jdId),
         user_id: userId,
-        timer_minutes: 30,
+        timer_minutes: 10,
       });
       const interviewId: number = started?.id ?? started?.interview_id;
       if (!interviewId) throw new Error("Interview did not start correctly");
 
-      // 5) Go to session with interviewId
+      // Go to session
       router.replace(`/interview/session?interviewId=${interviewId}`);
     } catch (err: any) {
       setError(err?.message || "Failed to start interview");
@@ -88,9 +80,11 @@ export default function DashboardPage() {
           <p className="mt-3 text-gray-400">Upload your resume and job description to get started.</p>
         </div>
 
-        {error ? (
-          <div className="mb-6 rounded-md border border-red-900 bg-red-950/50 px-4 py-3 text-sm text-red-300">{error}</div>
-        ) : null}
+        {error && (
+          <div className="mb-6 rounded-md border border-red-900 bg-red-950/50 px-4 py-3 text-sm text-red-300">
+            {error}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Upload Resume */}
@@ -103,24 +97,18 @@ export default function DashboardPage() {
               onDragLeave={preventDefault}
               htmlFor="resume"
               className="flex flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-[#2A3B4A] bg-[#0F1720] p-10 text-center cursor-pointer hover:border-[#385371]"
-           >
+            >
               <span className="material-symbols-outlined text-4xl text-gray-400">upload</span>
               <p className="font-semibold text-gray-300">Drag and drop or click to upload</p>
               <p className="text-sm text-gray-500">PDF or DOCX, up to 10MB</p>
               <input
                 id="resume"
                 type="file"
-                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                accept=".pdf,.doc,.docx"
                 className="hidden"
                 onChange={handleResumeChange}
               />
-              {resumeFile && (
-                <div className="mt-2 text-xs text-gray-400">Selected: {resumeFile.name}</div>
-              )}
-              <span className="mt-4 inline-flex items-center gap-2 rounded-md bg-[#12263A] px-3 py-2 text-sm font-semibold text-gray-200">
-                <span className="material-symbols-outlined text-base">file_upload</span>
-                Upload Resume
-              </span>
+              {resumeFile && <div className="mt-2 text-xs text-gray-400">Selected: {resumeFile.name}</div>}
             </label>
           </section>
 
@@ -150,5 +138,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-
