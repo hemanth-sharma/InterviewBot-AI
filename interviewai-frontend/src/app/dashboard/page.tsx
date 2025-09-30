@@ -56,7 +56,7 @@ export default function DashboardPage() {
         resume_id: Number(resumeId),
         job_description_id: Number(jdId),
         user_id: userId,
-        timer_minutes: 10,
+        timer_minutes: 30,
       });
       const interviewId: number = started?.id ?? started?.interview_id;
       if (!interviewId) throw new Error("Interview did not start correctly");
