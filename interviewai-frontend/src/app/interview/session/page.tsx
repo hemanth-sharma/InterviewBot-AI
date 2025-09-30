@@ -157,8 +157,9 @@ export default function InterviewSessionPage() {
   // Timer
   useEffect(() => {
     if (!expiresAt) return;
-
+  
     function updateTimer() {
+      if (!expiresAt) return; // guard against null
       let safeExpiresAt = expiresAt;
       if (safeExpiresAt.includes(".")) {
         safeExpiresAt = safeExpiresAt.split(".")[0] + "Z";
@@ -291,6 +292,7 @@ export default function InterviewSessionPage() {
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                     className="rounded-md bg-[#0F1720] border border-[#2A3B4A] px-2 py-1 text-sm"
+                    aria-label="Select programming language"
                   >
                     <option>Python</option>
                     <option>JavaScript</option>
