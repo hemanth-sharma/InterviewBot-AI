@@ -1,6 +1,7 @@
 # from pydantic import BaseSettings
 from pydantic_settings import BaseSettings
 from typing import Optional
+import os
 
 class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql://user:password@localhost:5432/interviewbot"
@@ -17,6 +18,7 @@ class Settings(BaseSettings):
     FRONTEND_URL: str = "http://localhost:3000"
 
     class Config:
-        env_file = ".env"
+        env_file = f".env.{os.getenv('APP_ENV', 'dev')}"
+        env_file_encoding = "utf-8"
 
 settings = Settings()

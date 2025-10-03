@@ -16,3 +16,4 @@ frontend/.env.local
 # --- Common ---
 *.log
 .DS_Store
+
